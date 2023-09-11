@@ -1,4 +1,9 @@
 {
+  /** This file is intended to configure the angular cli
+  Specify differences between development and production builds
+Specify the location of the main entry point
+Specify the location of the index.html file
+  */
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
@@ -31,7 +36,9 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              // Add the new styles here
+              "node_modules/@fortawesome/fontawesome-free/css/all.css"
             ],
             "scripts": []
           },
