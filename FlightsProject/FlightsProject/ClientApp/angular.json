@@ -1,8 +1,8 @@
 {
   /** This file is intended to configure the angular cli
   Specify differences between development and production builds
-Specify the location of the main entry point
-Specify the location of the index.html file
+  Specify the location of the main entry point
+  Specify the location of the index.html file
   */
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
