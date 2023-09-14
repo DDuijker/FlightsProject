@@ -10,6 +10,8 @@ builder.Services.AddSwaggerGen( c =>
         Url = "https://localhost:7167"
     });
 
+    //sets a unique identifier for each API operation by combining the action and controller values from the route values of the action descriptor.
+    c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["action"] + e.ActionDescriptor.RouteValues["controller"]}");
 });
 
 
@@ -37,3 +39,6 @@ app.MapControllerRoute(
 app.MapFallbackToFile("index.html"); ;
 
 app.Run();
+
+// this command will recreate our client api
+//npx ng-openapi-gen

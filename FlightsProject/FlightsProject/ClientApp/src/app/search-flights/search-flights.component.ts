@@ -23,9 +23,14 @@ export class SearchFlightsComponent {
   //search() method
   search() {
     //we just received it from the constructor
-    this.flightService.flightGet({})
+    this.flightService.searchFlight({})
     //this is a subscribe method, which gets excetuted when you get a response from the server
-      .subscribe(response => this.searchResults = response);
+      .subscribe(response => this.searchResults = response,
       //the flightRm array is now populated with the response from the server
+      this.handleError);
+    
+}
+  private handleError(error: any) {
+    console.error(error);
   }
 }
