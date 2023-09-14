@@ -12,8 +12,10 @@ builder.Services.AddSwaggerGen( c =>
 
 });
 
-var app = builder.Build();
 
+var app = builder.Build();
+//which domains are allowed to connect with our backend
+app.UseCors(builder => builder.WithOrigins("*"));
 app.UseSwagger().UseSwaggerUI();
 
 // Configure the HTTP request pipeline.

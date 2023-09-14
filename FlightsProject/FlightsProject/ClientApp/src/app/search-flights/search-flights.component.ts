@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { FlightService } from '../api/services/flight.service';
+import { FlightRm } from '../api/models/flight-rm';
+import { OnInit } from '@angular/core'; 
 
 @Component({
   selector: 'app-search-flights',
@@ -6,62 +9,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./search-flights.component.css']
 })
 export class SearchFlightsComponent {
-  searchResults: FlightRm[] = [
-    {
-      airline: "Air Canada",
-       departure: {
-        place: "Vancouver",
-         time: Date.now().toString()
-      },arrival: {
-        place: "Toronto",
-         time: Date.now().toString()
 
-      },
-     
-      price: "100",
-      remainingNumberOfSeats: 100
-    },
-    {
-      airline: "KLM",
-      departure: {
-        place: "Amsterdam",
-        time: Date.now().toString()
+  searchResults: FlightRm[] = []
+  //constructor take flightService
+  constructor(private flightService: FlightService) { }
 
-      },arrival: {
-        place: "Berlin",
-        time: Date.now().toString()
-      },
-      
-      price: "200",
-      remainingNumberOfSeats: 200
-    },
-    {
-      airline: "Lufthansa",
-      departure: {
-        place: "Berlin",
-        time: Date.now().toString()
-      }, arrival: {
-        place: "Amsterdam",
-        time: Date.now().toString()
-      },
-      price: "300",
-      remainingNumberOfSeats: 300
-    }
+  //what does ngOnInit do?
+  // ngOnInit() is a lifecycle hook. Angular calls ngOnInit() shortly after creating a component.
+  
+  ngOnInit(): void {
+  }
 
-
-
-  ];
-}
-
-export interface FlightRm {
-  airline: string;
-  arrival: TimePlaceRM;
-  departure: TimePlaceRM;
-  price: string;
-  remainingNumberOfSeats: number;
-}
-
-export interface TimePlaceRM {
-  place: string;
-  time: string;
+  //search() method
+  search() {
+    //we just received it from the constructor
+    this.flightService.flightGet({})
+    //this is a subscribe method, which gets excetuted when you get a response from the server
+      .subscribe(response => this.searchResults = response);
+      //the flightRm array is now populated with the response from the server
+  }
 }
