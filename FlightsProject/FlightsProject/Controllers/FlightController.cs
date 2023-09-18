@@ -8,17 +8,8 @@ namespace FlightsProject.Controllers
     public class FlightController : ControllerBase
     {
         private readonly ILogger<FlightController> _logger;
-
-        public FlightController(ILogger<FlightController> logger)
-        {
-            _logger = logger;
-        }
-
-        Random random = new Random();
-
-        [HttpGet]
-        public IEnumerable<FlightRm> Search() 
-            => new FlightRm[] {
+        static Random random = new Random();
+        private static FlightRm[] flights = new FlightRm[] {
         new (   Guid.NewGuid(),
                 "American Airlines",
                 random.Next(90, 5000).ToString(),
@@ -68,6 +59,20 @@ namespace FlightsProject.Controllers
                 new TimePlaceRm("Zagreb",DateTime.Now.AddHours(random.Next(4, 60))),
                     random.Next(1, 853))
         };
-        
+
+        public FlightController(ILogger<FlightController> logger)
+        {
+            _logger = logger;
+        }
+
+        [HttpGet]
+        public IEnumerable<FlightRm> Search()
+            => flights;
+
+        //create new endpoint
+        [HttpGet("{id}")]
+        public FlightRm Find(Guid id)
+            //checks every flight in the array and returns the one with the same id as the parameter
+            => flights.SingleOrDefault(flight => flight.Id == id);
     }
 }
